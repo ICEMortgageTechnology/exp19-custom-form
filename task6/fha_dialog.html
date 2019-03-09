@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script>
+            // Generates a case number and notifes the opener window
+            function generateCaseNum() {
+                // Generate a random string
+                let caseNum = "F" + Date.now().valueOf().toString();
+				document.getElementById("caseNum").value = caseNum;
+            }
+
+            // Generates a case number and notifes the opener window
+            function applyToLoan() {
+				let caseNum = document.getElementById("caseNum").value;
+                window.opener.postMessage({
+                    "fhaCaseNumber": caseNum
+                }, "*");
+            }
+
+        </script>
+        <style>
+            body { font-family: Arial, Helvetica, sans-serif }
+            .header { font-size: large }
+        </style>
+    </head>
+    <body onload="generateCaseNum();">
+        <img src="http://www.hud.gov/sites/dfiles/Housing/images/FHA3.JPG" width="200" height="100"><br>
+        <br>
+		<div class="header">FHA Case Number Generator</div><br>
+        <div class="body">
+            A new FHA Case Number has been generated for you:<br>
+			<input id="caseNum" type="text"></input>
+            <button onclick="generateCaseNum();">Generate New</button>
+            <button onclick="applyToLoan();">Apply to Loan</button>
+        </div>
+    </body>
+</html>
